@@ -1,5 +1,5 @@
 <aside :class="sidebarToggle ? 'translate-x-0' : '-translate-x-full'"
-    class="fixed left-0 top-0 z-50 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0"
+    class="fixed left-0 top-0 z-50 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-gray-800 lg:static lg:translate-x-0 border-r border-gray-100 dark:border-gray-700"
     @click.outside="sidebarToggle = false">
 
     <div class="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">

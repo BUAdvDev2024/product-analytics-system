@@ -18,8 +18,15 @@
 
 <body x-data="{
     sidebarToggle: window.innerWidth > 768,
+    darkMode: true,
     handleResize() { this.sidebarToggle = window.innerWidth > 768 }
-}" x-init="window.addEventListener('resize', handleResize)" class="font-sans antialiased">
+}" x-init="
+    window.addEventListener('resize', handleResize);
+    darkMode = JSON.parse(localStorage.getItem('darkMode'));
+    $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)));
+    "
+    :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}"
+     class="font-sans antialiased transition-all duration-300 ease-in-out">
     <div class="flex overflow-hidden">
         <x-sidebar />
     
