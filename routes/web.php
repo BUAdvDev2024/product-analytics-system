@@ -5,15 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
-    // redirect to dashboard
     return redirect()->route('dashboard');
 });
 
 Route::group(['middleware' => 'auth'], function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
-
-    // User CRUD
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::view('/products', 'dashboard')->name('products');
+    Route::view('/point-of-sales', 'dashboard')->name('point-of-sales');
 });
 
 
