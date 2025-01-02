@@ -47,6 +47,27 @@
     </div>
 
     <div class="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        
+        <x-charts.pi id="piChart" title="Sales per platform" :data="[
+            'labels' => [
+                'Restaurant',
+                'Online',
+                'Delivery App',
+            ],
+            'colours' => [
+                '#6577F3',
+                '#8FD0EF',
+                '#0FADCF'
+            ],
+            'data' => [
+                3500,
+                1500,
+                2000
+            ],
+            'percentages' => [
+                '50%',
+                '21%',
+                '29%'
+            ]
+        ]"/>
     </div>
 </x-app-layout>
