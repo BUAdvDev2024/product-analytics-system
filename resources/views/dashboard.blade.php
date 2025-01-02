@@ -47,27 +47,100 @@
     </div>
 
     <div class="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        <x-charts.pi id="piChart" title="Sales per platform" :data="[
-            'labels' => [
-                'Restaurant',
-                'Online',
-                'Delivery App',
-            ],
-            'colours' => [
-                '#6577F3',
-                '#8FD0EF',
-                '#0FADCF'
-            ],
-            'data' => [
-                3500,
-                1500,
-                2000
-            ],
-            'percentages' => [
-                '50%',
-                '21%',
-                '29%'
-            ]
-        ]"/>
+        <x-charts.pi span="col-span-5" id="piChart" title="Sales per platform" :data="[
+            'labels' => ['Restaurant', 'Online', 'Delivery App'],
+            'colours' => ['#6577F3', '#8FD0EF', '#0FADCF'],
+            'data' => [3500, 1500, 2000],
+            'percentages' => ['50%', '21%', '29%'],
+        ]" />
+
+        <div class="col-span-12 xl:col-span-7">
+            <div
+                class="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+                <h4 class="mb-6 text-xl font-bold text-black dark:text-white">
+                    Top Products
+                </h4>
+
+                <div class="flex flex-col">
+                    <div class="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-4">
+                        <div class="p-2.5 xl:p-5">
+                            <h5 class="text-sm font-medium uppercase xsm:text-base">Product</h5>
+                        </div>
+                        <div class="p-2.5 text-center xl:p-5 hidden sm:block">
+                            <h5 class="text-sm font-medium uppercase xsm:text-base">Views</h5>
+                        </div>
+                        <div class="p-2.5 text-center xl:p-5">
+                            <h5 class="text-sm font-medium uppercase xsm:text-base">Sales</h5>
+                        </div>
+                        <div class="p-2.5 text-center xl:p-5">
+                            <h5 class="text-sm font-medium uppercase xsm:text-base">Conversion</h5>
+                        </div>
+                    </div>
+
+                    @php
+                        $data = [
+                            [
+                                'name' => 'Margarite Pizza',
+                                'views' => '3.5K',
+                                'sales' => '$5,768',
+                                'conversion' => '4.8%',
+                            ],
+                            [
+                                'name' => 'Pepperoni Pizza',
+                                'views' => '2.2K',
+                                'sales' => '$4,635',
+                                'conversion' => '4.3%',
+                            ],
+                            [
+                                'name' => 'Cheese Pizza',
+                                'views' => '2.1K',
+                                'sales' => '$4,290',
+                                'conversion' => '3.7%',
+                            ],
+                            [
+                                'name' => 'Veggie Pizza',
+                                'views' => '1.5K',
+                                'sales' => '$3,580',
+                                'conversion' => '2.5%',
+                            ],
+                            [
+                                'name' => 'Hawaiian Pizza',
+                                'views' => '1.2K',
+                                'sales' => '$2,740',
+                                'conversion' => '1.9%',
+                            ],
+                        ];
+                    @endphp
+
+                    @foreach ($data as $item)
+                        <div class="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-4">
+                            <div class="flex items-center gap-3 p-2.5 xl:p-5">
+                                <p class="font-medium text-black dark:text-white">
+                                    {{ $item['name'] }}
+                                </p>
+                            </div>
+
+                            <div class="items-center justify-center p-2.5 xl:p-5 hidden sm:flex">
+                                <p class="font-medium text-black dark:text-white">
+                                    {{ $item['views'] }}
+                                </p>
+                            </div>
+
+                            <div class="flex items-center justify-center p-2.5 xl:p-5">
+                                <p class="font-medium text-meta-3">
+                                    {{ $item['sales'] }}
+                                </p>
+                            </div>
+
+                            <div class="items-center justify-center p-2.5 sm:flex xl:p-5">
+                                <p class="font-medium text-meta-5 text-center">
+                                    {{ $item['conversion'] }}
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </div>
 </x-app-layout>

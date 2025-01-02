@@ -2,6 +2,7 @@
     'id' => 'chart',
     'title' => '',
     'data' => [],
+    'span' => 'col-span-12',
 ])
 <div x-data='{
     id: "{{ $id }}",
@@ -20,7 +21,7 @@
         },
     },
 }'
-    class="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">
+    class="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:{{$span ?? 'col-span-12'}}">
     <div class="mb-3 justify-between gap-4 sm:flex">
         <div>
             <h4 class="text-xl font-bold text-black dark:text-white">
