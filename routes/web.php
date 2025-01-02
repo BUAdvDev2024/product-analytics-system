@@ -10,8 +10,8 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
-    Route::view('/products', 'dashboard')->name('products');
-    Route::view('/point-of-sales', 'dashboard')->name('point-of-sales');
+    Route::view('/products', 'products.index')->name('products');
+    Route::view('/point-of-sales', 'point-of-sales.index')->name('point-of-sales');
 });
 
 
