@@ -43,10 +43,34 @@ class POSServicesController extends Controller
 
     public function getProducts()
     {
+        $allPosProducts = [
+            'online' => $this->onlineService->getProducts(),
+            'delivery' => $this->deliveryAppService->getProducts(),
+            'restaurant' => $this->restaurantService->getProducts(),
+        ];
+
+        $allProducts = [];
+        foreach ($allPosProducts as $posType => $products) {
+            foreach ($products as $product) {
+                $productName = $product['name'];
+                if (isset($allProducts[$productName])) {
+                    $allProducts[$productName]['current_sales'] += $product['current_sales'];
+                    $allProducts[$productName]['views'] += $product['views'];
+                } else {
+                    $allProducts[$productName] = $product;
+                }
+            }
+        }
+
+        foreach ($allProducts as $productName => $product) {
+            $allProducts[$productName]['conversion_rate'] = round(($product['current_sales'] / $product['views']) * 100, 2);
+        }
+
         return [
             'online' => $this->onlineService->getProducts(),
             'delivery' => $this->deliveryAppService->getProducts(),
             'restaurant' => $this->restaurantService->getProducts(),
+            'all' => $allProducts,
         ];
     }
 }

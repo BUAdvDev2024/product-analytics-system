@@ -163,12 +163,17 @@ class POSService
             $percentageChange = $previousSales > 0 
                 ? round((($currentSales - $previousSales) / $previousSales) * 100, 2)
                 : 0;
+            $views = rand(100, 1000); // Random number of views
+
+            $conversionRate = $views > 0 ? round(($currentSales / $views) * 100, 2) : 0;
 
             $productsWithData[] = [
                 'name' => $product,
                 'current_sales' => $currentSales,
                 'previous_sales' => $previousSales,
                 'percentage_change' => $percentageChange,
+                'views' => $views,
+                'conversion_rate' => $conversionRate,
             ];
         }
 

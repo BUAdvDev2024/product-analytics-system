@@ -47,11 +47,25 @@
     </div>
 
     <div class="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+        @php
+            $labels = array_map(function ($label) {
+                return ucfirst($label);
+            }, array_keys($viewsPerPos));
+
+            $totals = array_map(function ($value) {
+                return $value['current_period']['total'];
+            }, array_values($viewsPerPos));
+
+            //using the aray of totals work out the percentage of each value
+            $percentages = array_map(function ($value) use ($totals) {
+                return round(($value / array_sum($totals)) * 100, 2) . '%';
+            }, $totals);
+        @endphp
         <x-charts.pi span="col-span-5" id="piChart" title="Sales per platform" :data="[
-            'labels' => ['Restaurant', 'Online', 'Delivery App'],
+            'labels' => $labels,
             'colours' => ['#6577F3', '#8FD0EF', '#0FADCF'],
-            'data' => [3500, 1500, 2000],
-            'percentages' => ['50%', '21%', '29%'],
+            'data' => $totals,
+            'percentages' => $percentages,
         ]" />
 
         <div class="col-span-12 lg:col-span-7">
@@ -77,42 +91,7 @@
                         </div>
                     </div>
 
-                    @php
-                        $data = [
-                            [
-                                'name' => 'Margarite Pizza',
-                                'views' => '3.5K',
-                                'sales' => '$5,768',
-                                'conversion' => '4.8%',
-                            ],
-                            [
-                                'name' => 'Pepperoni Pizza',
-                                'views' => '2.2K',
-                                'sales' => '$4,635',
-                                'conversion' => '4.3%',
-                            ],
-                            [
-                                'name' => 'Cheese Pizza',
-                                'views' => '2.1K',
-                                'sales' => '$4,290',
-                                'conversion' => '3.7%',
-                            ],
-                            [
-                                'name' => 'Veggie Pizza',
-                                'views' => '1.5K',
-                                'sales' => '$3,580',
-                                'conversion' => '2.5%',
-                            ],
-                            [
-                                'name' => 'Hawaiian Pizza',
-                                'views' => '1.2K',
-                                'sales' => '$2,740',
-                                'conversion' => '1.9%',
-                            ],
-                        ];
-                    @endphp
-
-                    @foreach ($data as $item)
+                    @foreach ($top5Products as $item)
                         <div class="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-4">
                             <div class="flex items-center gap-3 p-2.5 xl:p-5">
                                 <p class="font-medium text-black dark:text-white">
@@ -128,13 +107,13 @@
 
                             <div class="flex items-center justify-center p-2.5 xl:p-5">
                                 <p class="font-medium text-meta-3">
-                                    {{ $item['sales'] }}
+                                    {{ $item['current_sales'] }}
                                 </p>
                             </div>
 
                             <div class="items-center justify-center p-2.5 sm:flex xl:p-5">
                                 <p class="font-medium text-meta-5 text-center">
-                                    {{ $item['conversion'] }}
+                                    {{ $item['conversion_rate'] }}
                                 </p>
                             </div>
                         </div>

@@ -78,16 +78,17 @@ class PageController extends Controller
         //** Products */
         $productsPerPos = $this->posServicesController->getProducts();
 
-        $allProductNames = [];
-        foreach ($productsPerPos as $posType => $products) {
-            foreach ($products as $product) {
-                $allProductNames[] = $product['name']; // Collect product names
-            }
-        }
+        $allProducts = $productsPerPos['all'];
 
-        $uniqueProductNames = array_unique($allProductNames);
-        $totalUniqueProducts = count($uniqueProductNames);
+        $totalUniqueProducts = count($allProducts);
 
+        // Sort the products by sales
+        usort($allProducts, function ($a, $b) {
+            return $b['current_sales'] <=> $a['current_sales'];
+        });
+
+        // Get the top 5 best selling products
+        $top5Products = array_slice($allProducts, 0, 5);
 
         return view('dashboard', [
             // Views
@@ -105,6 +106,7 @@ class PageController extends Controller
             // Products
             'productsPerPos' => $productsPerPos,
             'totalUniqueProducts' => $totalUniqueProducts,
+            'top5Products' => $top5Products,
         ]);
     }
 }
