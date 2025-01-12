@@ -12,7 +12,7 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
     Route::get('/products', [PageController::class, 'products'])->name('products');
-    Route::view('/point-of-sales', 'point-of-sales.index')->name('point-of-sales');
+    Route::get('/point-of-sales', [PageController::class, 'pos'])->name('point-of-sales');
 });
 
 

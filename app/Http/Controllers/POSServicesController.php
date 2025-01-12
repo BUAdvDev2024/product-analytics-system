@@ -75,4 +75,28 @@ class POSServicesController extends Controller
             'all' => $allProducts,
         ];
     }
+
+    public function getPos()
+    {
+        return [
+            [
+                'name' => 'Online',
+                'number_of_products' => count($this->onlineService->getProducts()),
+                'status' => 'Active',
+                'last_updated' => now()->subMinutes(rand(1, 60))->diffForHumans(),
+            ],
+            [
+                'name' => 'Delivery App',
+                'number_of_products' => count($this->deliveryAppService->getProducts()),
+                'status' => 'Active',
+                'last_updated' => now()->subMinutes(rand(1, 60))->diffForHumans(),
+            ],
+            [
+                'name' => 'Restaurant',
+                'number_of_products' => count($this->restaurantService->getProducts()),
+                'status' => 'Active',
+                'last_updated' => now()->subMinutes(rand(1, 60))->diffForHumans(),
+            ]
+        ];
+    }
 }

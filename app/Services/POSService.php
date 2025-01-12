@@ -37,9 +37,8 @@ class POSService
             return $this->getTestProducts();
         }
 
-        return $this->fetchFromApi('https://api.example.com/pos/products', $period);
+        return $this->fetchFromApi('https://api.example.com/pos/products', '');
     }
-
 
     // Fetch data from an API endpoint
     protected function fetchFromApi(string $url, string $period): array

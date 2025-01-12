@@ -34,30 +34,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-stroke dark:divide-strokedark">
-                        @php
-                            $data = [
-                                [
-                                    'name' => 'Restaurant',
-                                    'products' => 12,
-                                    'status' => 'Active',
-                                    'updated_at' => '2 days ago',
-                                ],
-                                [
-                                    'name' => 'Online',
-                                    'products' => 12,
-                                    'status' => 'Active',
-                                    'updated_at' => '2 days ago',
-                                ],
-                                [
-                                    'name' => 'Delivery App',
-                                    'products' => 12,
-                                    'status' => 'Active',
-                                    'updated_at' => '2 days ago',
-                                ],
-                            ];
-                        @endphp
-
-                        @foreach ($data as $item)
+                        @foreach ($pos as $item)
                             <tr>
                                 <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                     <div class="flex items-center">
@@ -68,12 +45,12 @@
                                     </div>
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                                    <div class="text-black dark:text-white">{{ $item['products'] }}</div>
+                                    <div class="text-black dark:text-white">{{ $item['number_of_products'] }}</div>
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                                     <div class="text-black dark:text-white">{{ $item['status'] }}</div>
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-5 text-sm font-medium">{{ $item['updated_at'] }}</td>
+                                <td class="whitespace-nowrap px-3 py-5 text-sm font-medium">{{ $item['last_updated'] }}</td>
                             </tr>
                         @endforeach
                     </tbody>

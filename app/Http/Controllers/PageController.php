@@ -128,4 +128,13 @@ class PageController extends Controller
             'productsPerPos' => $productsPerPos,
         ]);
     }
+
+    public function pos()
+    {
+        $pos = $this->posServicesController->getPos();
+
+        return view('point-of-sales.index', [
+            'pos' => $pos,
+        ]);
+    }
 }
