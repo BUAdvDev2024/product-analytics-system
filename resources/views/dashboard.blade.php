@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
-        <x-stat-card title="Total views" value="$3.456K" percentage="0.43%" :increase="false">
+        <x-stat-card title="Total views" :value="$totalViews" :percentage="$averagePercentageDifference . '%'" :increase="$avgViewPerNegative">
             <x-slot name="icon">
                 <svg class="fill-primary dark:fill-white" width="22" height="16" viewBox="0 0 22 16" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -14,7 +14,7 @@
             </x-slot>
         </x-stat-card>
 
-        <x-stat-card title="Total Sales" value="45,2K" percentage="0.43%" :increase="true">
+        <x-stat-card title="Total Sales" :value="$totalSales" percentage="{{$averagePercentageDifference}}%" :increase="$avgViewPerNegative">
             <x-slot name="icon">
                 <svg class="fill-primary dark:fill-white" width="20" height="22" viewBox="0 0 20 22"
                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,7 +31,7 @@
             </x-slot>
         </x-stat-card>
 
-        <x-stat-card title="Total Products" value="24">
+        <x-stat-card title="Total Products" :value="$totalUniqueProducts">
             <x-slot name="icon">
                 <svg class="fill-primary dark:fill-white" width="22" height="22" viewBox="0 0 22 22"
                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +54,7 @@
             'percentages' => ['50%', '21%', '29%'],
         ]" />
 
-        <div class="col-span-12 xl:col-span-7">
+        <div class="col-span-12 lg:col-span-7">
             <div
                 class="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
                 <h4 class="mb-6 text-xl font-bold text-black dark:text-white">
