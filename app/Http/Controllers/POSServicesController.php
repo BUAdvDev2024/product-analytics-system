@@ -56,8 +56,10 @@ class POSServicesController extends Controller
                 if (isset($allProducts[$productName])) {
                     $allProducts[$productName]['current_sales'] += $product['current_sales'];
                     $allProducts[$productName]['views'] += $product['views'];
+                    $allProducts[$productName]['available_in'][] = $posType;
                 } else {
                     $allProducts[$productName] = $product;
+                    $allProducts[$productName]['available_in'] = [$posType];
                 }
             }
         }

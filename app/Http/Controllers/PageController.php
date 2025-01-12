@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use function Laravel\Prompts\form;
+
 class PageController extends Controller
 {
     protected $posServicesController;
@@ -107,6 +109,23 @@ class PageController extends Controller
             'productsPerPos' => $productsPerPos,
             'totalUniqueProducts' => $totalUniqueProducts,
             'top5Products' => $top5Products,
+        ]);
+    }
+
+    public function products()
+    {
+        $productsPerPos = $this->posServicesController->getProducts();
+
+        usort($productsPerPos['all'], function ($a, $b) {
+            return strcmp($a['name'], $b['name']);
+        });
+
+        foreach ($productsPerPos['all'] as $i => $product) {
+            $productsPerPos['all'][$i]['available_in'] = implode(', ', array_map('ucfirst', $product['available_in']));
+        }
+
+        return view('products.index', [
+            'productsPerPos' => $productsPerPos,
         ]);
     }
 }
